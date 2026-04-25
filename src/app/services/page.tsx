@@ -96,7 +96,7 @@ export default function ServicesPage() {
                 <div className="lg:col-span-5 space-y-6 md:space-y-8">
                   <div className="bg-primary text-secondary w-16 h-16 md:w-20 md:h-20 flex items-center justify-center">
                     {/* scaling icon for mobile */}
-                    {React.cloneElement(service.icon as React.ReactElement, { size: 28 })}
+                    {React.cloneElement(service.icon as React.ReactElement<{ size?: number }>, { size: 28 })}
                   </div>
                   <h2 className="font-heading text-4xl sm:text-5xl md:text-6xl uppercase leading-tight">
                     {service.title}
