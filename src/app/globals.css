@@ -1,26 +1,37 @@
 @import "tailwindcss";
-
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@import "tw-animate-css";
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-heading: var(--font-bebas);
+  --font-sans: var(--font-inter);
+  
+  --color-background: #F0F4EF; /* Ghost White */
+  --color-foreground: #0D1821; /* Rich Black */
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+:root {
+  --background: #F0F4EF;
+  --foreground: #0D1821;
+}
+
+@layer base {
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    margin: 0;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom Selection Color to match your theme */
+::selection {
+  background-color: #0D1821;
+  color: #F0F4EF;
+}
+html, body {
+  overflow-x: hidden;
+  width: 100%;
+  position: relative;
 }
