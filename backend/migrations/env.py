@@ -84,6 +84,7 @@ def run_migrations_online():
     # --- FORCE DATABASE URL FROM ENVIRONMENT WITH ESCAPED SPECIAL CHARACTERS ---
     import os
     db_url = os.getenv("DATABASE_URL")
+    print(f"DEBUG: DATABASE_URL is set to: {db_url}")
     if db_url:
         # The .replace('%', '%%') prevents the "invalid interpolation" error
         config.set_main_option("sqlalchemy.url", db_url.replace('%', '%%'))

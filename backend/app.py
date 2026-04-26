@@ -13,7 +13,7 @@ from dotenv import load_dotenv
 from flask import Flask, request, jsonify,current_app
 from extensions import db, mail
 from config import Config
-from models import db, ContactInquiry, User,Asset
+from models import  ContactInquiry, User,Asset
 from routes.inventory import inventory_bp
 from routes.leads import leads_bp
 from routes.newsletter import newsletter_bp
@@ -23,14 +23,11 @@ from routes.newsletter import newsletter_bp
 app = Flask(__name__)
 load_dotenv()
 app.config.from_object(Config)
-database_url = os.getenv('DATABASE_URL')
-if database_url:
-    app.config['SQLALCHEMY_DATABASE_URI'] = database_url
-else:
-    # Only raise this if you are absolutely sure it should be set
-    raise ValueError("DATABASE_URL is not set!")
+db_url = os.getenv('DATABASE_URL')
+if not db_url:
+    raise ValueError("DATABASE_URL is not set in environment variables!")
 
-app.config['SQLALCHEMY_DATABASE_URI'] = database_url
+app.config['SQLALCHEMY_DATABASE_URI'] = db_url
 app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL')
 
 app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
