@@ -1,1 +1,1 @@
-web: bash -c "export DATABASE_URL=$DATABASE_URL && flask db upgrade && gunicorn app:app"
+web: bash -c "flask db stamp head && flask db upgrade && gunicorn app:app"
