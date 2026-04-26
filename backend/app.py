@@ -9,6 +9,7 @@ from flask_bcrypt import Bcrypt
 from flask_mail import Mail, Message
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import text
 from dotenv import load_dotenv
 from flask import Flask, request, jsonify,current_app
 from extensions import db, mail
@@ -77,6 +78,18 @@ def handle_exception(e):
     # This will print the full error details to your Railway logs
     traceback.print_exc() 
     return jsonify({"error": str(e)}), 500
+
+
+
+@app.route('/health-db')
+def health_db():
+    try:
+        # This executes a raw SQL query to test the actual database connection
+        db.session.execute(text('SELECT 1'))
+        return jsonify({"status": "Database Connected Successfully!"}), 200
+    except Exception as e:
+        # This will show us the REAL error and the host it is trying to reach
+        return jsonify({"status": "Database Connection Failed", "error": str(e)}), 500
 
 @app.route('/create-admin-debug')
 def create_admin_debug():
