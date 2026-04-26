@@ -81,11 +81,13 @@ def run_migrations_offline():
 def run_migrations_online():
     """Run migrations in 'online' mode."""
     
-    # --- FORCE DATABASE URL FROM ENVIRONMENT ---
+    # --- FORCE DATABASE URL FROM ENVIRONMENT WITH ESCAPED SPECIAL CHARACTERS ---
     import os
-    if os.getenv("DATABASE_URL"):
-        config.set_main_option("sqlalchemy.url", os.getenv("DATABASE_URL"))
-    # --------------------------------------------
+    db_url = os.getenv("DATABASE_URL")
+    if db_url:
+        # The .replace('%', '%%') prevents the "invalid interpolation" error
+        config.set_main_option("sqlalchemy.url", db_url.replace('%', '%%'))
+    # ---------------------------------------------------------------------------
 
     # this callback is used to prevent an auto-migration from being generated
     # when there are no changes to the schema
