@@ -1,3 +1,4 @@
+import os
 import logging
 from logging.config import fileConfig
 
@@ -16,12 +17,17 @@ logger = logging.getLogger('alembic.env')
 
 
 def get_engine():
+    # 1. Try to get the engine from the Flask app (for normal use)
     try:
-        # this works with Flask-SQLAlchemy<3 and Alchemical
-        return current_app.extensions['migrate'].db.get_engine()
-    except (TypeError, AttributeError):
-        # this works with Flask-SQLAlchemy>=3
         return current_app.extensions['migrate'].db.engine
+    except (TypeError, AttributeError, RuntimeError):
+        # 2. If that fails (which it does in Railway during build), 
+        #    manually create an engine using the DATABASE_URL environment variable
+        from sqlalchemy import create_engine
+        database_url = os.getenv('DATABASE_URL')
+        if not database_url:
+            raise ValueError("DATABASE_URL is not set in environment!")
+        return create_engine(database_url)
 
 
 def get_engine_url():
