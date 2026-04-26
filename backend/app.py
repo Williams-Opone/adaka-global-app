@@ -7,12 +7,11 @@ from flask_cors import CORS
 import traceback
 from flask_bcrypt import Bcrypt
 from flask_mail import Mail, Message
-from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import text
 from dotenv import load_dotenv
 from flask import Flask, request, jsonify,current_app
-from extensions import db, mail
+from extensions import db, mail , migrate
 from config import Config
 from models import  ContactInquiry, User,Asset
 from routes.inventory import inventory_bp
@@ -39,7 +38,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db.init_app(app)
 mail.init_app(app)
-migrate = Migrate(app, db)
+migrate.init_app(app, db)
 bcrypt = Bcrypt(app)
 CORS(app, resources={r"/api/*": {"origins": [
         "https://adaka-global.vercel.app" ,"https://adakaglobalinc.com"]}})
