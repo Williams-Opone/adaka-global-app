@@ -76,7 +76,17 @@ def handle_exception(e):
     traceback.print_exc() 
     return jsonify({"error": str(e)}), 500
 
-
+@app.route('/create-admin-debug')
+def create_admin_debug():
+    from models import User
+    admin_email = 'admin@adaka.com'
+    if not User.query.filter_by(email=admin_email).first():
+        user = User(email=admin_email)
+        user.set_password('Adakaofficial100%')
+        db.session.add(user)
+        db.session.commit()
+        return "Admin created!"
+    return "Admin already exists."
 
 @app.route('/api/admin/login', methods=['POST'])
 def login():
@@ -87,33 +97,28 @@ def login():
 
         user = User.query.filter_by(email=email).first()
 
-        if user and user.check_password(password):
-            secret = current_app.config.get('SECRET_KEY')
-            
-            # DEBUG: If secret is None, this will crash
-            if not secret:
-                print("DEBUG: SECRET_KEY is missing!")
-                return jsonify({'message': 'Server Configuration Error'}), 500
+        # 1. Handle user not found
+        if not user:
+            return jsonify({'message': 'Invalid credentials'}), 401
 
-            token = jwt.encode({
-                'user': email,
-                'exp': datetime.datetime.utcnow() + datetime.timedelta(hours=1)
-            }, secret, algorithm="HS256")
+        # 2. Handle wrong password
+        if not user.check_password(password):
+            return jsonify({'message': 'Invalid credentials'}), 401
 
-            response = jsonify({'message': 'Login successful'})
-            
-            response.set_cookie(
-            'admin_token', 
-            token, 
-            httponly=True,   # Important for security
-            secure=False,    # Set to True if using HTTPS
-            samesite='Lax'
-        )
+        # 3. Success
+        secret = current_app.config.get('SECRET_KEY')
+        token = jwt.encode({
+            'user': email,
+            'exp': datetime.datetime.utcnow() + datetime.timedelta(hours=1)
+        }, secret, algorithm="HS256")
         
+        response = jsonify({'message': 'Login successful'})
+        response.set_cookie('admin_token', token, httponly=True, secure=False, samesite='Lax')
         return response, 200
+        
     except Exception as e:
-        print(f"DEBUG ERROR: {str(e)}") # THIS PRINT IS VITAL
-        return jsonify({'message': 'Server Error'}), 500
+        traceback.print_exc() # This will show the actual error in Railway logs
+        return jsonify({'message': 'Server Error', 'details': str(e)}), 500
 
 
 
