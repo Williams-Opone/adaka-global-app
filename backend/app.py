@@ -4,7 +4,7 @@ import click
 import jwt
 import datetime
 from flask_cors import CORS
-
+import traceback
 from flask_bcrypt import Bcrypt
 from flask_mail import Mail, Message
 from flask_migrate import Migrate
@@ -72,7 +72,8 @@ def create_admin(email, password):
 # --- Routes ---
 @app.errorhandler(Exception)
 def handle_exception(e):
-    # This will return JSON even if the server crashes
+    # This will print the full error details to your Railway logs
+    traceback.print_exc() 
     return jsonify({"error": str(e)}), 500
 
 
