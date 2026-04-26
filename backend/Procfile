@@ -1,1 +1,1 @@
-web: bash -c "flask db stamp head && flask db upgrade && gunicorn --bind 0.0.0.0:$PORT app:app"
+web: bash -c "flask db stamp head && flask db upgrade && gunicorn --bind 0.0.0.0:$PORT --timeout 120 app:app"
