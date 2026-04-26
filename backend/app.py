@@ -24,8 +24,11 @@ app = Flask(__name__)
 load_dotenv()
 app.config.from_object(Config)
 database_url = os.getenv('DATABASE_URL')
-if not database_url:
-    raise ValueError("DATABASE_URL is not set in the environment variables!")
+if database_url:
+    app.config['SQLALCHEMY_DATABASE_URI'] = database_url
+else:
+    # Only raise this if you are absolutely sure it should be set
+    raise ValueError("DATABASE_URL is not set!")
 
 app.config['SQLALCHEMY_DATABASE_URI'] = database_url
 app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL')
