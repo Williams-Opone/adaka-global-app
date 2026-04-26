@@ -20,7 +20,7 @@ export default function AddInventory() {
 
   // Fetch current inventory on load
   useEffect(() => {
-    fetch('http://127.0.0.1:5000/api/inventory/all')
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/inventory/all`)
       .then(res => res.json())
       .then(data => setInventory(data));
   }, []);
@@ -52,7 +52,7 @@ export default function AddInventory() {
     images.forEach((file) => data.append('images', file));
 
     try {
-      const res = await fetch('http://127.0.0.1:5000/api/inventory/add', { method: 'POST', body: data });
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/inventory/add`, { method: 'POST', body: data });
         if (res.ok) {
           toast.success("Asset published successfully!", { id: toastId });
         // Reset form...
@@ -68,7 +68,7 @@ export default function AddInventory() {
 
   const deleteAsset = async (id: number) => {
     if (!confirm("Are you sure you want to delete this asset?")) return;
-    await fetch(`http://127.0.0.1:5000/api/inventory/delete/${id}`, { method: 'DELETE' });
+    await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/inventory/delete/${id}`, { method: 'DELETE' });
     setInventory(inventory.filter((i: any) => i.id !== id));
   };
 

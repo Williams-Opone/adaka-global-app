@@ -10,7 +10,7 @@ export default function InventoryPage() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch('http://127.0.0.1:5000/api/inventory/all') 
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/inventory/all`) 
       .then((res) => res.json())
       .then((data) => {
         setItems(data);

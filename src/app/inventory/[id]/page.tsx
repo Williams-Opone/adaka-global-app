@@ -16,7 +16,7 @@ export default function InventoryDetail() {
   useEffect(() => {
     const fetchItem = async () => {
       try {
-        const res = await fetch(`http://127.0.0.1:5000/api/inventory/${id}`);
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/inventory/${id}`);
         if (!res.ok) throw new Error("Item not found");
         const data = await res.json();
         setItem(data);

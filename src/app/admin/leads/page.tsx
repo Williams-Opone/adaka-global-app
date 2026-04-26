@@ -19,7 +19,7 @@ export default function LeadDashboard() {
   const [leads, setLeads] = useState<Lead[]>([]);
 
   useEffect(() => {
-    fetch('http://127.0.0.1:5000/api/admin/leads')
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/admin/leads`)
       .then(res => res.json())
       .then(data => { if (Array.isArray(data)) setLeads(data); })
       .catch(err => console.error("Error fetching leads:", err));
