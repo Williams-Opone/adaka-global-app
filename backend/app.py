@@ -25,7 +25,7 @@ load_dotenv()
 app.config.from_object(Config)
 db_url = os.getenv('DATABASE_URL')
 if not db_url:
-    raise ValueError("DATABASE_URL is not set in environment variables!")
+    raise RuntimeError("DATABASE_URL is not set!")
 
 app.config['SQLALCHEMY_DATABASE_URI'] = db_url
 app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL')
