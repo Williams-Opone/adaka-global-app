@@ -21,9 +21,11 @@ from routes.newsletter import newsletter_bp
 
 
 app = Flask(__name__)
-load_dotenv()
+if os.environ.get('RAILWAY_ENVIRONMENT_NAME') is None:
+    load_dotenv()
 app.config.from_object(Config)
 db_url = os.getenv('DATABASE_URL')
+
 if not db_url:
     raise RuntimeError("DATABASE_URL is not set!")
 
