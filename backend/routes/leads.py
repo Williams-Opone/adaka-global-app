@@ -3,7 +3,8 @@ from flask import Blueprint, jsonify, request,current_app
 from flask_mail import  Message
 from threading import Thread
 from extensions import mail
-from models import db, ContactInquiry
+from models import  ContactInquiry
+from extensions import db
 
 
 leads_bp = Blueprint('leads_bp', __name__)

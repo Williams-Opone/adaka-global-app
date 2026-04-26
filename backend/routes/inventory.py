@@ -4,7 +4,8 @@ import cloudinary
 import cloudinary.uploader
 from flask import Blueprint, jsonify, request
 from sqlalchemy.dialects.postgresql import JSON
-from models import db, Asset ,AssetImage,NewsletterSubscriber
+from models import  Asset ,AssetImage,NewsletterSubscriber
+from extensions import db
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from .utils import send_newsletter_blast
 
