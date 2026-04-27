@@ -52,7 +52,9 @@ app.register_blueprint(newsletter_bp)
 
 
 
-
+@app.before_request
+def log_request_info():
+    print(f"DEBUG: Incoming request: {request.method} {request.path}")
 
 
 @app.cli.command("create-admin")
@@ -104,17 +106,7 @@ def health_db():
             "Environment_URI": os.environ.get('DATABASE_URL')
         }), 500
 
-@app.route('/create-admin-debug')
-def create_admin_debug():
-    from models import User
-    admin_email = 'admin@adaka.com'
-    if not User.query.filter_by(email=admin_email).first():
-        user = User(email=admin_email)
-        user.set_password('Adakaofficial100%')
-        db.session.add(user)
-        db.session.commit()
-        return "Admin created!"
-    return "Admin already exists."
+
 
 @app.route('/api/admin/login', methods=['POST'])
 def login():

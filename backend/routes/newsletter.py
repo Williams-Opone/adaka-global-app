@@ -7,8 +7,7 @@ newsletter_bp = Blueprint('newsletter_bp', __name__)
 
 @newsletter_bp.route('/api/newsletter', methods=['POST'])
 def subscribe():
-    if request.method == 'OPTIONS':
-        return '', 200 # Crucial for CORS
+    
     data = request.get_json()
     email = data.get('email')
     
