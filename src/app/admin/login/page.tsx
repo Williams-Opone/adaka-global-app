@@ -45,7 +45,7 @@ export default function AdminLogin() {
             <input 
               type="email" 
               placeholder="ENTER EMAIL" 
-              className="w-full bg-transparent border-b border-[#0D1821]/20 py-3 focus:outline-none focus:border-[#0D1821] font-sans text-sm uppercase" 
+              className="w-full bg-transparent border-b border-[#0D1821]/20 py-3 focus:outline-none focus:border-[#0D1821] font-sans text-sm " 
               autoCapitalize="none"
               autoCorrect="off"
               onChange={(e) => setEmail(e.target.value)}
@@ -59,7 +59,7 @@ export default function AdminLogin() {
               <input 
                 type={showPassword ? "text" : "password"} // Toggle type
                 placeholder="ENTER PASSWORD" 
-                className="w-full bg-transparent border-b border-[#0D1821]/20 py-3 focus:outline-none focus:border-[#0D1821] font-sans text-sm uppercase"
+                className="w-full bg-transparent border-b border-[#0D1821]/20 py-3 focus:outline-none focus:border-[#0D1821] font-sans text-sm "
                 onChange={(e) => setPassword(e.target.value)}
                 autoCapitalize="none"
                 autoCorrect="off"

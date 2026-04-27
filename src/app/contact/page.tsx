@@ -131,7 +131,7 @@ export default function ContactPage() {
 
                   placeholder="FULL NAME" 
 
-                  className="bg-transparent border-b border-secondary/20 py-3 focus:outline-none focus:border-secondary font-sans text-sm uppercase"
+                  className="bg-transparent border-b border-secondary/20 py-3 focus:outline-none focus:border-secondary font-sans text-sm "
 
                   value={formData.full_name}
 
@@ -147,7 +147,7 @@ export default function ContactPage() {
 
                   placeholder="EMAIL ADDRESS" 
 
-                  className="bg-transparent border-b border-secondary/20 py-3 focus:outline-none focus:border-secondary font-sans text-sm uppercase"
+                  className="bg-transparent border-b border-secondary/20 py-3 focus:outline-none focus:border-secondary font-sans text-sm "
 
                   value={formData.email}
 
@@ -159,7 +159,7 @@ export default function ContactPage() {
                   required
                   type="tel" 
                   placeholder="PHONE NUMBER" 
-                  className="bg-transparent border-b border-secondary/20 py-3 focus:outline-none focus:border-secondary font-sans text-sm uppercase"
+                  className="bg-transparent border-b border-secondary/20 py-3 focus:outline-none focus:border-secondary font-sans text-sm "
                   value={formData.phone_number}
                   onChange={(e) => setFormData({...formData, phone_number: e.target.value})}
                 />
@@ -196,7 +196,7 @@ export default function ContactPage() {
 
                   placeholder="COMPANY (OPTIONAL)" 
 
-                  className="bg-transparent border-b border-secondary/20 py-3 focus:outline-none focus:border-secondary font-sans text-sm uppercase"
+                  className="bg-transparent border-b border-secondary/20 py-3 focus:outline-none focus:border-secondary font-sans text-sm "
 
                   value={formData.company}
 
@@ -250,7 +250,7 @@ export default function ContactPage() {
 
                 rows={4} 
 
-                className="w-full bg-transparent border-b border-secondary/20 py-3 focus:outline-none focus:border-secondary font-sans text-sm uppercase resize-none"
+                className="w-full bg-transparent border-b border-secondary/20 py-3 focus:outline-none focus:border-secondary font-sans text-sm  resize-none"
 
                 value={formData.message}
 

@@ -68,7 +68,7 @@ export default function ContactSection() {
                   type="text" 
                   value={formData.full_name}
                   onChange={(e) => setFormData({...formData, full_name: e.target.value})}
-                  className="bg-transparent border-b border-[#0D1821]/20 py-2 focus:outline-none focus:border-[#0D1821] transition-all font-sans text-sm uppercase" 
+                  className="bg-transparent border-b border-[#0D1821]/20 py-2 focus:outline-none focus:border-[#0D1821] transition-all font-sans text-sm " 
                 />
               </div>
 
@@ -79,7 +79,7 @@ export default function ContactSection() {
                   type="email" 
                   value={formData.email}
                   onChange={(e) => setFormData({...formData, email: e.target.value})}
-                  className="bg-transparent border-b border-[#0D1821]/20 py-2 focus:outline-none focus:border-[#0D1821] transition-all font-sans text-sm uppercase" 
+                  className="bg-transparent border-b border-[#0D1821]/20 py-2 focus:outline-none focus:border-[#0D1821] transition-all font-sans text-sm " 
                 />
               </div>
             </div>
@@ -105,7 +105,7 @@ export default function ContactSection() {
                 rows={3} 
                 value={formData.message}
                 onChange={(e) => setFormData({...formData, message: e.target.value})}
-                className="bg-transparent border-b border-[#0D1821]/20 py-2 focus:outline-none focus:border-[#0D1821] transition-all resize-none font-sans text-sm uppercase" 
+                className="bg-transparent border-b border-[#0D1821]/20 py-2 focus:outline-none focus:border-[#0D1821] transition-all resize-none font-sans text-sm " 
               />
             </div>
 
