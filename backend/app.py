@@ -19,10 +19,17 @@ from routes.leads import leads_bp
 from routes.newsletter import newsletter_bp
 
 
+
+
+app = Flask(__name__)
+
 if os.environ.get('RAILWAY_ENVIRONMENT_NAME') is None:
     load_dotenv()
 
-app = Flask(__name__)
+app.config.from_object(Config)
+
+# 2. THEN force override the Database URI so it CANNOT be ignored
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')
 
 db_url = os.environ.get('DATABASE_URL')
 if not db_url:
@@ -33,7 +40,6 @@ app.config['SQLALCHEMY_DATABASE_URI'] = db_url
 app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-app.config.from_object(Config)
 
 db.init_app(app)
 mail.init_app(app)
@@ -82,12 +88,27 @@ def handle_exception(e):
 @app.route('/health-db')
 def health_db():
     try:
-        # This executes a raw SQL query to test the actual database connection
+        # Check what SQLAlchemy *thinks* its URI is
+        configured_uri = app.config.get('SQLALCHEMY_DATABASE_URI')
+        
+        # Check what the OS environment says
+        env_uri = os.environ.get('DATABASE_URL')
+        
+        # Try to connect
         db.session.execute(text('SELECT 1'))
-        return jsonify({"status": "Database Connected Successfully!"}), 200
+        
+        return jsonify({
+            "status": "Success",
+            "Configured_URI": configured_uri,
+            "Environment_URI": env_uri
+        }), 200
     except Exception as e:
-        # This will show us the REAL error and the host it is trying to reach
-        return jsonify({"status": "Database Connection Failed", "error": str(e)}), 500
+        return jsonify({
+            "status": "Failed",
+            "Error": str(e),
+            "Configured_URI": app.config.get('SQLALCHEMY_DATABASE_URI'),
+            "Environment_URI": os.environ.get('DATABASE_URL')
+        }), 500
 
 @app.route('/create-admin-debug')
 def create_admin_debug():
