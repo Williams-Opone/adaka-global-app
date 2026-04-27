@@ -39,9 +39,17 @@ db.init_app(app)
 mail.init_app(app)
 migrate.init_app(app, db)
 bcrypt = Bcrypt(app)
-CORS(app, resources={r"/api/*": {"origins": [
-        "https://adaka-global.vercel.app" ,"https://adakaglobalinc.com"]}})
-
+CORS(app, resources={
+    r"/api/*": {
+        "origins": [
+            "https://adaka-global.vercel.app", 
+            "https://adakaglobalinc.com", 
+            "https://www.adakaglobalinc.com"
+        ],
+        "methods": ["GET", "POST", "OPTIONS"],
+        "allow_headers": ["Content-Type", "Authorization"]
+    }
+})
 
 app.register_blueprint(inventory_bp)
 app.register_blueprint(leads_bp)
