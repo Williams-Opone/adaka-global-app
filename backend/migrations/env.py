@@ -85,18 +85,15 @@ def run_migrations_online():
     
     # 1. Get the URL directly from the environment (Railway Dashboard)
     db_url = os.environ.get("DATABASE_URL")
-    if not db_url:
-        raise ValueError("DATABASE_URL not set in environment")
     
-    # 2. Create the engine manually (bypasses Flask's current_app)
-    # The .replace('%', '%%') is only needed if your password has a % sign
-    connectable = create_engine(db_url.replace('%', '%%'))
+    # Create the engine directly with the environment URL
+    connectable = create_engine(db_url)
 
-    # 3. Configure the context
     with connectable.connect() as connection:
         context.configure(
             connection=connection,
-            target_metadata=db.metadata # Use the metadata from your db object
+            target_metadata=db.metadata, # Ensure this matches your db object
+            # IMPORTANT: Do not pass sqlalchemy.url here
         )
 
         with context.begin_transaction():
