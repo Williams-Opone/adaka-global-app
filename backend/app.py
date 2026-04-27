@@ -39,17 +39,12 @@ db.init_app(app)
 mail.init_app(app)
 migrate.init_app(app, db)
 bcrypt = Bcrypt(app)
-CORS(app, resources={
-    r"/api/*": {
-        "origins": [
-            "https://adaka-global.vercel.app", 
-            "https://adakaglobalinc.com", 
-            "https://www.adakaglobalinc.com"
-        ],
-        "methods": ["GET", "POST", "OPTIONS"],
-        "allow_headers": ["Content-Type", "Authorization"]
-    }
-})
+CORS(app, resources={r"/api/*": {
+    "origins": ["https://adaka-global.vercel.app", "https://adakaglobalinc.com", "https://www.adakaglobalinc.com"],
+    "methods": ["GET", "POST", "OPTIONS"],
+    "allow_headers": ["Content-Type", "Authorization"],
+    "supports_credentials": True
+}})
 
 app.register_blueprint(inventory_bp)
 app.register_blueprint(leads_bp)
@@ -58,11 +53,23 @@ app.register_blueprint(newsletter_bp)
 # Switching to PostgreSQL as discussed for the 9+ years exp standard
 # Replace 'username', 'password', and 'adaka_db' with your local Postgres credentials
 
-
+@app.before_request
+def handle_options():
+    if request.method == 'OPTIONS':
+        return '', 200
 
 @app.before_request
 def log_request_info():
     print(f"DEBUG: Incoming request: {request.method} {request.path}")
+
+@app.after_request
+def add_cors_headers(response):
+    # This ensures that even if CORS() has a glitch, the headers are forced
+    response.headers['Access-Control-Allow-Origin'] = request.headers.get('Origin', '*')
+    response.headers['Access-Control-Allow-Headers'] = 'Content-Type,Authorization'
+    response.headers['Access-Control-Allow-Methods'] = 'GET,PUT,POST,DELETE,OPTIONS'
+    response.headers['Access-Control-Allow-Credentials'] = 'true'
+    return response
 
 
 @app.cli.command("create-admin")
