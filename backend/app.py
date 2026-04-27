@@ -19,22 +19,21 @@ from routes.leads import leads_bp
 from routes.newsletter import newsletter_bp
 
 
-
-app = Flask(__name__)
 if os.environ.get('RAILWAY_ENVIRONMENT_NAME') is None:
     load_dotenv()
-app.config.from_object(Config)
-db_url = os.getenv('DATABASE_URL')
 
+app = Flask(__name__)
+
+db_url = os.environ.get('DATABASE_URL')
 if not db_url:
     raise RuntimeError("DATABASE_URL is not set!")
 
-app.config['SQLALCHEMY_DATABASE_URI'] = db_url
-app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL')
 
+app.config['SQLALCHEMY_DATABASE_URI'] = db_url
 app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
+app.config.from_object(Config)
 
 db.init_app(app)
 mail.init_app(app)
