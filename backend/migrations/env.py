@@ -3,8 +3,10 @@ import logging
 from logging.config import fileConfig
 
 from flask import current_app
-
+ 
 from alembic import context
+from sqlalchemy import create_engine
+from extensions import db
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
@@ -81,35 +83,20 @@ def run_migrations_offline():
 def run_migrations_online():
     """Run migrations in 'online' mode."""
     
-    # --- FORCE DATABASE URL FROM ENVIRONMENT WITH ESCAPED SPECIAL CHARACTERS ---
-    import os
-    db_url = os.getenv("DATABASE_URL")
-    print(f"DEBUG: DATABASE_URL is set to: {db_url}")
-    if db_url:
-        # The .replace('%', '%%') prevents the "invalid interpolation" error
-        config.set_main_option("sqlalchemy.url", db_url.replace('%', '%%'))
-    # ---------------------------------------------------------------------------
+    # 1. Get the URL directly from the environment (Railway Dashboard)
+    db_url = os.environ.get("DATABASE_URL")
+    if not db_url:
+        raise ValueError("DATABASE_URL not set in environment")
+    
+    # 2. Create the engine manually (bypasses Flask's current_app)
+    # The .replace('%', '%%') is only needed if your password has a % sign
+    connectable = create_engine(db_url.replace('%', '%%'))
 
-    # this callback is used to prevent an auto-migration from being generated
-    # when there are no changes to the schema
-    def process_revision_directives(context, revision, directives):
-        if getattr(config.cmd_opts, 'autogenerate', False):
-            script = directives[0]
-            if script.upgrade_ops.is_empty():
-                directives[:] = []
-                logger.info('No changes in schema detected.')
-
-    conf_args = current_app.extensions['migrate'].configure_args
-    if conf_args.get("process_revision_directives") is None:
-        conf_args["process_revision_directives"] = process_revision_directives
-
-    connectable = get_engine()
-
+    # 3. Configure the context
     with connectable.connect() as connection:
         context.configure(
             connection=connection,
-            target_metadata=get_metadata(),
-            **conf_args
+            target_metadata=db.metadata # Use the metadata from your db object
         )
 
         with context.begin_transaction():

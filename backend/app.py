@@ -23,21 +23,15 @@ from routes.newsletter import newsletter_bp
 
 app = Flask(__name__)
 
-if os.environ.get('RAILWAY_ENVIRONMENT_NAME') is None:
-    load_dotenv()
-
-app.config.from_object(Config)
-
-# 2. THEN force override the Database URI so it CANNOT be ignored
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')
-
-db_url = os.environ.get('DATABASE_URL')
-if not db_url:
-    raise RuntimeError("DATABASE_URL is not set!")
 
 
-app.config['SQLALCHEMY_DATABASE_URI'] = db_url
-app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
+
+
+os.environ['DATABASE_URL'] = "postgresql://postgres:nyvlnvYaefCgtnCmXJriQVejYIpRJiFa@postgres.railway.internal:5432/railway"
+
+# Set configurations explicitly
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
+app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 
