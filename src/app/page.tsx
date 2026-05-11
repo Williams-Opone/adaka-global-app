@@ -6,7 +6,30 @@ import InventoryCard from "@/components/features/InventoryCard";
 import ContactSection from "@/components/features/ContactSection";
 
 
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Corporation",
+  "name": "ADAKA GLOBAL INC",
+  "url": "https://www.adakaglobalinc.com",
+  "logo": "https://res.cloudinary.com/dotcy7lhz/image/upload/v1776879640/dzsqepd6ckgn7lqdrqos.jpg",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Calgary",
+    "addressRegion": "AB",
+    "addressCountry": "CA"
+  },
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "telephone": "+1-825-760-4125",
+    "contactType": "customer service"
+  }
+};
 
+// Inside your component:
+<script
+  type="application/ld+json"
+  dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+/>
 
 export default function Home() {
   return (

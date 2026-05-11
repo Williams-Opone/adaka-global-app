@@ -6,6 +6,18 @@ import { MapPin, ShieldCheck, Clock, ArrowLeft, Loader2 } from "lucide-react";
 import Link from "next/link";
 import { InventoryItem } from "@/types/inventory";
 
+export async function generateMetadata({ params }: { params: { id: string } }) {
+  const asset = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/inventory/${params.id}`).then(res => res.json());
+
+  return {
+    title: `${asset.name} | Industrial Assets`,
+    description: `Buy ${asset.name} located in ${asset.location}. ${asset.description.substring(0, 150)}...`,
+    openGraph: {
+      images: [asset.image_url],
+    },
+  };
+}
+
 export default function InventoryDetail() {
   const { id } = useParams();
   const router = useRouter();
