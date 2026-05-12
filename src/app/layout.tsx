@@ -1,11 +1,8 @@
-"use client";
-
 import { Inter, Bebas_Neue } from "next/font/google";
 import { Toaster } from 'react-hot-toast';
 import "./globals.css";
-import Navbar from "@/components/layout/Navbar";
-import Footer from "@/components/layout/Footer";
-import { usePathname } from "next/navigation";
+import NavbarWrapper from "@/components/layout/NavbarWrapper"; 
+import FooterWrapper from "@/components/layout/FooterWrapper"; 
 import { Metadata } from 'next';
 
 // Font configurations
@@ -36,7 +33,7 @@ export const metadata: Metadata = {
     siteName: "ADAKA GLOBAL INC",
     images: [
       {
-        url: "/public/images/adakalogo.JPG", // Create a 1200x630px image in your public folder
+        url: "/images/adakalogo.JPG", // Removed /public prefix (Next.js refers to public folder from the root /)
         width: 1200,
         height: 630,
       },
@@ -55,11 +52,6 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const pathname = usePathname();
-  
-  // Check if the current URL starts with /admin
-  const isAdminPage = pathname?.startsWith("/admin");
-
   return (
     <html 
       lang="en" 
@@ -70,19 +62,15 @@ export default function RootLayout({
         className="min-h-screen flex flex-col bg-primary text-secondary font-sans antialiased overflow-x-hidden w-full" 
         suppressHydrationWarning={true}
       >
-        {/* Only show Navbar if NOT on an admin page */}
-        {!isAdminPage && <Navbar />}
+        {/* The Wrappers handle the "isAdminPage" logic internally now */}
+        <NavbarWrapper />
 
-        {/* We use a conditional class for padding. 
-            On admin pages, we remove 'pt-20' so your Admin Dashboard starts at the very top.
-        */}
-        <main className={`flex-grow ${!isAdminPage ? "pt-20" : ""}`}>
+        <main className="flex-grow">
           {children}
           <Toaster position="top-right" />
         </main>
 
-        {/* Only show Footer if NOT on an admin page */}
-        {!isAdminPage && <Footer />}
+        <FooterWrapper />
       </body>
     </html>
   );

@@ -26,14 +26,15 @@ const jsonLd = {
 };
 
 // Inside your component:
-<script
-  type="application/ld+json"
-  dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-/>
+
 
 export default function Home() {
   return (
     <>
+        <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+    />
       <Hero />
       <OperationalPreview />
       <Services />
