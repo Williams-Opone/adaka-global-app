@@ -12,7 +12,7 @@ export default function Hero() {
           animate={{ scale: 1 }}
           transition={{ duration: 20, repeat: Infinity, repeatType: "reverse" }}
           src="https://images.unsplash.com/photo-1516937941344-00b4e0337589?auto=format&fit=crop&q=80&w=2070" 
-          className="w-full h-full object-cover opacity-40 grayscale"
+          className="w-full h-full object-cover opacity-40 "
         />
         {/* Adjusted gradient for mobile readability */}
         <div className="absolute inset-0 bg-gradient-to-t from-[#0D1821] via-[#0D1821]/20 to-[#0D1821]/80" />
