@@ -9,13 +9,13 @@ const capabilities = [
     title: "Offshore Logistics",
     label: "Maritime Support",
     description: "Expert coordination of ballistic security vessels, PSVs, and crew boats across the Gulf of Guinea.",
-    image: "/images/container.jpg" // Use a local, high-res image!
+    image: "/images/container.webp" // Use a local, high-res image!
   },
   {
     title: "Heavy Infrastructure",
     label: "Earthmoving & Marine",
     description: "End-to-end management of large-scale excavation and dredging projects for industrial sites.",
-    image: "/images/excavator.jpg"
+    image: "/images/excavator.webp"
   }
 ];
 
