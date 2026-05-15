@@ -44,7 +44,7 @@ export default function OperationalPreview() {
               className="group relative overflow-hidden bg-[#162633] p-8 md:p-10 flex flex-col justify-between h-[400px] sm:h-[450px] md:h-[500px]"
             >
               {/* Background Image: Higher base opacity on mobile since 'hover' is less frequent */}
-              <div className="absolute inset-0 z-0 opacity-30 lg:opacity-20 lg:group-hover:opacity-40 transition-opacity duration-700">
+              <div className="absolute inset-0 z-0 opacity-30 lg:opacity-40 lg:group-hover:opacity-40 transition-opacity duration-700">
                   <Image 
                     src={item.image} 
                     alt={item.title}
