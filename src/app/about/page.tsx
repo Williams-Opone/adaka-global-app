@@ -24,7 +24,7 @@ export default function AboutPage() {
           </motion.h1>
           
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 md:gap-16 items-start z-10 relative">
-            <div className="lg:col-span-5 aspect-[4/5] overflow-hidden bg-[#0D1821]/5 grayscale contrast-125 mb-8 lg:mb-0">
+            <div className="lg:col-span-5 aspect-[4/5] overflow-hidden bg-[#0D1821]/5  contrast-125 mb-8 lg:mb-0">
               <img src="https://images.unsplash.com/photo-1516937941344-00b4e0337589?auto=format&fit=crop&q=80&w=1200" className="w-full h-full object-cover" alt="Industrial Legacy" />
             </div>
 

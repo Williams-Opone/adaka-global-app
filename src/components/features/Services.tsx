@@ -9,7 +9,7 @@ const serviceData = [
     id: "01",
     title: "Engineering & Manpower",
     icon: <HardHat size={32} />,
-    image: "/images/engineering.jpg",
+    image: "/images/engineering.webp",
     description: "Our Engineering Services comprise of Conceptual, Front End and Detailed Engineering Designs, Project and Construction Management, and AutoCAD Drafting.",
     subItems: ["Onshore Flowstations", "Offshore Production Platforms", "Subsea Umbilicals", "Technical Manpower Supply"]
   },
@@ -17,7 +17,7 @@ const serviceData = [
     id: "02",
     title: "Marine Support",
     icon: <Ship size={32} />,
-    image: "/images/marinesupport.jpg",
+    image: "/images/marinesupport.webp",
     description: "Providing a broad range of offshore support services coupled with the highest standards of safety and industry-leading technology.",
     subItems: ["Crew Boats / FSIV", "Platform Supply Vessels (PSV)", "Diving Support Vessels", "Security (Ballistic) Vessels"]
   },
@@ -25,7 +25,7 @@ const serviceData = [
     id: "03",
     title: "Process Control Systems",
     icon: <Zap size={32} />,
-    image: "/images/process.jpg",
+    image: "/images/process.webp",
     description: "Full implementation of PLC – SIS – DCS – HMI – SCADA systems. Fabrication and Integration of Process Skids and Utility Enclosures.",
     subItems: ["Gas Treatment Skids", "Chemical Injection", "AMS Knowledge Base", "Real-time Data Tagging"]
   },
@@ -33,7 +33,7 @@ const serviceData = [
     id: "04",
     title: "Procurement & Supply",
     icon: <Drill size={32} />,
-    image: "/images/procurement.jpg",
+    image: "/images/procurement.webp",
     description: "Strategic partnerships with global OEMs to provide Oil & Gas tools, OCTGs, Line pipes, and hazardous waste incinerators.",
     subItems: ["Wellheads & Xmas Trees", "Industrial Fire Equipment", "Chemicals & Valves", "Pipe Fittings"]
   },
@@ -41,7 +41,7 @@ const serviceData = [
     id: "05",
     title: "Import & Export Logistics",
     icon: <Ship size={32} />, // Or use 'Globe' from lucide-react
-    image: "/images/warehousing.jpg",
+    image: "/images/warehousing.webp",
     description: "End-to-end clearing, forwarding, and global freight management. We navigate complex customs frameworks to ensure your industrial assets move across borders without delay.",
     subItems: ["Customs Brokerage", "Freight Forwarding", "Warehousing & Storage", "Global Supply Chain Management"]
   },
@@ -49,7 +49,7 @@ const serviceData = [
     id: "06",
     title: "Minerals & Farm Produce",
     icon: <Pickaxe size={32} />, 
-    image: "/images/farmproduce.jpg",
+    image: "/images/farmproduce.webp",
     description: "Sourcing and distribution of high-grade solid minerals and premium agricultural products for the global market, ensuring strict adherence to international quality standards.",
     subItems: ["Lithium Ore & Solid Minerals", "Crude Palm Oil (CPO)", "Export Grade Raw Materials", "Quality Assay Verification"]
   }

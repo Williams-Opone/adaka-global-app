@@ -52,7 +52,7 @@ export default function OperationalPreview() {
                     sizes="(max-width: 768px) 100vw, 50vw"
                     priority={index < 2} // Preload the first two images to prevent initial blur
                     quality={100}        // Set to 100 to force max sharpness
-                    className="object-cover grayscale"
+                    className="object-cover "
                   />
                   {/* Mobile-specific overlay to ensure text pops */}
                   <div className="absolute inset-0 bg-[#0D1821]/40 lg:hidden" />

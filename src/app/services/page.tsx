@@ -11,7 +11,7 @@ const fullServices = [
     id: "marine",
     title: "Marine Support",
     icon: <Ship size={32} />,
-    image: "/images/services/ship.jpg",
+    image: "/images/services/ship.webp",
     content: "We provide a broad range of offshore support services coupled with the highest standards of safety, service and technology available in the industry.",
     specs: [
       { label: "Vessels", value: "Crew Boats, PSV, FSIV, AHTS" },
@@ -23,7 +23,7 @@ const fullServices = [
     id: "engineering",
     title: "Engineering & Manpower",
     icon: <HardHat size={32} />,
-    image: "/images/services/engineering.jpg",
+    image: "/images/services/engineering.webp",
     content: "Our Engineering Services comprises of Conceptual, Front End and Detailed Engineering Designs (FEED), Project Management, and AutoCAD Drafting.",
     specs: [
       { label: "Facilities", value: "Onshore Flowstations, Pipelines" },
@@ -35,7 +35,7 @@ const fullServices = [
     id: "process",
     title: "Process Control Systems",
     icon: <Cog size={32} />,
-    image: "/images/services/process.jpg",
+    image: "/images/services/process.webp",
     content: "Full implementation of PLC – SIS – DCS – HMI – SCADA systems in Nigeria, eliminating high cost and delays in mobilizing expatriates.",
     specs: [
       { label: "Fabrication", value: "Gas Treatment & Chemical Injection Skids" },
@@ -47,7 +47,7 @@ const fullServices = [
     id: "resources",
     title: "Mineral & Farm Produce",
     icon: <Mountain size={32} />,
-    image: "/images/services/farm.jpg",
+    image: "/images/services/farm.webp",
     content: "Strategic trading in Mineral Resources and large-scale supply of farm produce and maritime/construction equipments since 2011.",
     specs: [
       { label: "Minerals", value: "Lithium Ore, Coal, Iron Ore" },
@@ -113,7 +113,7 @@ export default function ServicesPage() {
                         fill
                         sizes="(max-width: 768px) 100vw, 40vw" // Optimized for your grid
                         quality={90}
-                        className="object-cover grayscale contrast-125 brightness-90 sm:brightness-100"
+                        className="object-cover  contrast-125 brightness-90 sm:brightness-100"
                       />
                     </motion.div>
                   </div>

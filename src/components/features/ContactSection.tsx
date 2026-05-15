@@ -45,7 +45,7 @@ export default function ContactSection() {
             alt="Adaka Global Logistics"
             fill
             sizes="(max-width: 1024px) 100vw, 50vw"
-            className="object-cover opacity-50 grayscale"
+            className="object-cover opacity-50 "
             priority
           />
           <div className="absolute inset-0 flex items-center justify-center p-8 md:p-12 z-10">
